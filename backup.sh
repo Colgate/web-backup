@@ -30,7 +30,7 @@ for i in $(/bin/ls $serverdir | egrep -v "default|example");
 do
     # Grab some variables from the server block.
     domain=$(awk '/server_name/ {print $2}' $serverdir/$i | head -n 1)
-    docroot=$(dirname $(awk '/root/ {print $2}' $serverdir/$i | sed 's/;//'))
+    docroot=$(dirname $(awk '/root/ {print $2}' $serverdir/$i))
     logpath=$([ ! -z $(awk '/error_log/ {print $2}' $serverdir/$i) ] && dirname $(awk '/error_log/ {print $2}' $serverdir/$i))
     # Verify everything looks proper before beginning.
     [[ ! -d $backupdir ]] && { echo -e "\tBackup directory does not exist. Creating."; mkdir -p $backupdir; }
